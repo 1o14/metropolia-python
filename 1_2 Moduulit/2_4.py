@@ -2,13 +2,13 @@ luku1 = int(input("Anna ensimmäinen kokonaisluku: "))
 luku2 = int(input("Anna toinen kokonaisluku: "))
 luku3 = int(input("Anna kolmas kokonaisluku: "))
 
-#Laske lukujen summa
+#Laskee lukujen summan
 summa = luku1 + luku2 + luku3
 
-#Laske lukujen tulo
+#Laskee lukujen tulon
 tulo = luku1 * luku2 * luku3
 
-#Laske lukujen keskiarvo
+#Laskee lukujen keskiarvon
 keskiarvo = summa / 3
 
 print("Lukujen summa on:", summa)

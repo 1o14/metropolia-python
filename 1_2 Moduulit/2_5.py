@@ -6,14 +6,14 @@ leiviska_nauloina = 20
 naula_luoteina = 32
 luoti_grammoina = 13.3
 
-#Laske massa grammoina
+#Laskee massan grammoina
 massa_grammoina = (
     leiviskat * leiviska_nauloina * naula_luoteina * luoti_grammoina +
     naulat * naula_luoteina * luoti_grammoina +
     luodit * luoti_grammoina
 )
 
-#Muunna massa kilogrammoiksi ja grammoiksi
+#Muuntaa massan kilogrammoiksi ja grammoiksi
 kilogrammat = massa_grammoina // 1000
 grammat = massa_grammoina % 1000
 

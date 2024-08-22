@@ -1,9 +1,9 @@
 import math
 
-#Kysy ympyrän säde
+#Kysyy ympyrän säteen
 sade = float(input("Anna ympyrän säde: "))
 
-#Laske ympyrän pinta-ala
+#Laskee ympyrän pinta-alan
 pinta_ala = math.pi * sade * sade
 
 print("Ympyrän pinta-ala on: ", round(pinta_ala, 2))

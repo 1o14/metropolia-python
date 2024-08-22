@@ -1,10 +1,10 @@
 kanta = float(input("Anna suorakulmion kanta: "))
 korkeus = float(input("Anna suorakulmion korkeus: "))
 
-#Laske suorakulmion piiri
+#Laskee suorakulmion piirin
 piiri = 2 *(kanta + korkeus)
 
-#Laske suorakulmion pinta-ala
+#Laskee suorakulmion pinta-alan
 pinta_ala = kanta * korkeus
 
 print("Suorakulmion piiri on:", piiri)

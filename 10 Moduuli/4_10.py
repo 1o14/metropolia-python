@@ -1,14 +1,3 @@
-import random
-
-class Auto:
-    def __init__(self, nimi):
-        self.nimi = nimi
-        self.matka = 0
-
-    def kulje(self):
-        nopeus_muutos = random.randint(-5, 5)
-        self.matka += max(0, 60 + nopeus_muutos)
-
 class Kilpailu:
     def __init__(self, nimi, pituus, autot):
         self.nimi = nimi
@@ -20,30 +9,22 @@ class Kilpailu:
             auto.kulje()
 
     def tulosta_tilanne(self):
-        print(f"\nKilpailun '{self.nimi}' tilanne:")
-        print(f"{'Auto':<15}{'Matka (km)':<15}")
-        print("-" * 30)
+        print(f"Kilpailu: {self.nimi}")
         for auto in self.autot:
-            print(f"{auto.nimi:<15}{auto.matka:<15.2f}")
+            print(f"{auto.nimi}: {auto.kilometrit} km")
 
     def kilpailu_ohi(self):
-        return any(auto.matka >= self.pituus for auto in self.autot)
+        return any(auto.kilometrit >= self.pituus for auto in self.autot)
 
-# Pääohjelma
-def main():
-    autot = [Auto(f"Auto {i+1}") for i in range(10)]
-    kilpailu = Kilpailu("Suuri romuralli",  8000, autot)
-
-    tunti = 0
-    while not kilpailu.kilpailu_ohi():
-        kilpailu.tunti_kuluu()
-        tunti += 1
-        if tunti % 10 == 0:
-            kilpailu.tulosta_tilanne()
-
-    kilpailu.tulosta_tilanne()
-    print("Kilpailu on ohi!")
-
-# Suorita pääohjelma
 if __name__ == "__main__":
-    main()
+    autot = [Auto(f"Auto {i+1}") for i in range(10)]
+    kilpailu = Kilpailu("Suuri romuralli", 8000, autot)
+
+    for tunti in range(10):
+        kilpailu.tunti_kuluu()
+        kilpailu.tulosta_tilanne()
+        if kilpailu.kilpailu_ohi():
+            print("Kilpailu on ohi!")
+            break
+
+    kilpailu.tulosta_tilanne()  # Tulostaa tilanteen kilpailun päätyttyä

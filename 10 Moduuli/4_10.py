@@ -32,7 +32,7 @@ class Kilpailu:
 # Pääohjelma
 def main():
     autot = [Auto(f"Auto {i+1}") for i in range(10)]
-    kilpailu = Kilpailu("Suuri romuralli", 8000, autot)
+    kilpailu = Kilpailu("Suuri romuralli",  8000, autot)
 
     tunti = 0
     while not kilpailu.kilpailu_ohi():

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reitin suunnittelu</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+</head>
+<body>
+    <h1>Reitin suunnittelu Karaporttiin 2</h1>
+    <form id="address-form">
+        <label for="address">Syötä osoite:</label>
+        <input type="text" id="address" placeholder="Esim. Kamppi, Helsinki">
+        <button type="submit">Etsi reitti</button>
+    </form>
+
+    <div id="map" style="height: 500px; margin-top: 20px;"></div>
+
+    <script>
+        var map = L.map('map').setView([60.168992, 24.932366], 13); // Kamppi, Helsinki alkuasetukset
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        var geocoder = L.Control.Geocoder.nominatim();
+        var schoolLocation = [60.200659, 24.650330]; // Karaportti 2, Espoo
+
+        // Lomakkeen lähetys
+        document.getElementById('address-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var address = document.getElementById('address').value;
+
+            geocoder.geocode(address, function(results) {
+                if (results.length > 0) {
+                    var startLocation = results[0].center;
+                    L.Routing.control({
+                        waypoints: [
+                            L.latLng(startLocation.lat, startLocation.lng),
+                            L.latLng(schoolLocation[0], schoolLocation[1])
+                        ],
+                        createMarker: function() { return null; }
+                    }).addTo(map);
+
+                    // Näytetään reitin aloitus ja lopetusaika
+                    var startTime = new Date();
+                    var endTime = new Date(startTime.getTime() + 30 * 60 * 1000); // Simuloidaan 30 minuutin reitti
+                    alert("Reitti alkaa: " + startTime.toLocaleTimeString() + "\nReitti päättyy: " + endTime.toLocaleTimeString());
+                } else {
+                    alert("Osoitetta ei löytynyt!");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
